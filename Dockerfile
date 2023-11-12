@@ -25,7 +25,7 @@ RUN python3 -m venv stable-diffusion-webui/venv/ \
 	&& pip install xformers
 
 # Install models of interest
-RUN wget -q -O /home/stableuser/stable-diffusion-webui/models/Stable-diffusion/juggernautXL_version6Rundiffusion.safetensors https://civitai.com/api/download/models/198530
+RUN wget -O /home/stableuser/stable-diffusion-webui/models/Stable-diffusion/juggernautXL_version6Rundiffusion.safetensors https://civitai.com/api/download/models/198530
 
 EXPOSE 7860
 ENTRYPOINT [ "bash", "/home/stableuser/webui.sh", "--listen", "--port", "7860", "--no-download-sd-model", "--xformers"]
