@@ -38,4 +38,4 @@ RUN set -ex && \
 RUN wget -q -O /home/stableuser/stable-diffusion-webui/models/Stable-diffusion/juggernautXL_version6Rundiffusion.safetensors http://civitai.com/api/download/models/198530
 
 EXPOSE 7860
-ENTRYPOINT [ "bash", "/home/stableuser/webui.sh", "--listen", "--port", "7860", "--no-download-sd-model", "--xformers"]
+ENTRYPOINT [ "bash", "/home/stableuser/stable-diffusion-webui/webui.sh", "--listen", "--port", "7860", "--no-download-sd-model", "--xformers"]
