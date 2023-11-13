@@ -24,9 +24,15 @@ RUN wget -q https://raw.githubusercontent.com/AUTOMATIC1111/stable-diffusion-web
 	&& pip install xformers \
  	&& pip cache purge
 
-# New stage to clean unused data
-FROM nvidia/cuda:12.2.2-runtime-ubuntu22.04
+# New stage to download models and run
+FROM nvidia/cuda:12.2.2-runtime-ubuntu22.04 as modelsdownload
 COPY --from=build /home/stableuser/stable-diffusion-webui /home/stableuser/stable-diffusion-webui
+
+# Install runtime system dependencies
+RUN set -ex && \
+	apt-get update && apt-get install --no-install-recommends --no-install-suggests -y \
+	wget \
+	&& apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install models of interest
 RUN wget -q -O /home/stableuser/stable-diffusion-webui/models/Stable-diffusion/juggernautXL_version6Rundiffusion.safetensors http://civitai.com/api/download/models/198530
