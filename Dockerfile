@@ -1,4 +1,4 @@
-FROM nvidia/cuda:12.2.2-runtime-ubuntu22.04
+FROM nvidia/cuda:12.2.2-runtime-ubuntu22.04 as build
 LABEL author="Álvaro Barbero Jiménez, https://github.com/albarji"
 
 # Install system dependencies
@@ -24,8 +24,15 @@ RUN python3 -m venv stable-diffusion-webui/venv/ \
 	&& source stable-diffusion-webui/venv/bin/activate \
 	&& pip install xformers
 
+# Clean pip cache
+RUN pip cache purge
+
+# New stage to clean unused data
+FROM nvidia/cuda:12.2.2-runtime-ubuntu22.04
+COPY --from=build /home/stableuser/stable-diffusion-webui /home/stableuser/stable-diffusion-webui
+
 # Install models of interest
-RUN wget -O /home/stableuser/stable-diffusion-webui/models/Stable-diffusion/juggernautXL_version6Rundiffusion.safetensors http://civitai.com/api/download/models/198530
+RUN wget -q -O /home/stableuser/stable-diffusion-webui/models/Stable-diffusion/juggernautXL_version6Rundiffusion.safetensors http://civitai.com/api/download/models/198530
 
 EXPOSE 7860
 ENTRYPOINT [ "bash", "/home/stableuser/webui.sh", "--listen", "--port", "7860", "--no-download-sd-model", "--xformers"]
