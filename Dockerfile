@@ -13,19 +13,16 @@ USER stableuser
 WORKDIR /home/stableuser
 
 # Download automatic1111 stable-diffusion-webui install script
-RUN wget -q https://raw.githubusercontent.com/AUTOMATIC1111/stable-diffusion-webui/master/webui.sh
-
-# Install automatic1111 stable-diffusion-webui dependencies
-RUN bash webui.sh --skip-torch-cuda-test --exit
-
-# Install xformers for more efficient GPU usage
+# and run it in install mode to install its dependencies.
+# Also install also xformers for more efficient GPU usage
 SHELL ["/bin/bash", "-c"]
-RUN python3 -m venv stable-diffusion-webui/venv/ \
+RUN wget -q https://raw.githubusercontent.com/AUTOMATIC1111/stable-diffusion-webui/master/webui.sh \
+	&& bash webui.sh --skip-torch-cuda-test --exit \
+ 	&& rm webui.sh \
+	&& python3 -m venv stable-diffusion-webui/venv/ \
 	&& source stable-diffusion-webui/venv/bin/activate \
-	&& pip install xformers
-
-# Clean pip cache
-RUN pip cache purge
+	&& pip install xformers \
+ 	&& pip cache purge
 
 # New stage to clean unused data
 FROM nvidia/cuda:12.2.2-runtime-ubuntu22.04
