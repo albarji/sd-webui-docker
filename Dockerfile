@@ -31,7 +31,7 @@ COPY --from=build /home/stableuser/stable-diffusion-webui /home/stableuser/stabl
 # Install runtime system dependencies
 RUN set -ex && \
 	apt-get update && apt-get install --no-install-recommends --no-install-suggests -y \
-	wget \
+	wget git python3 python3-venv \
 	&& apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install models of interest
