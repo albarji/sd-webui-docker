@@ -27,9 +27,6 @@ RUN wget -q https://raw.githubusercontent.com/AUTOMATIC1111/stable-diffusion-web
 # New stage to download models and run
 FROM nvidia/cuda:12.2.2-runtime-ubuntu22.04
 COPY --from=build /home/stableuser/stable-diffusion-webui /home/stableuser/stable-diffusion-webui
-RUN useradd -ms /bin/bash stableuser
-USER stableuser
-WORKDIR /home/stableuser
 
 # Install runtime system dependencies
 RUN set -ex && \
@@ -39,6 +36,10 @@ RUN set -ex && \
 
 # Install models of interest
 RUN wget -q -O /home/stableuser/stable-diffusion-webui/models/Stable-diffusion/juggernautXL_version6Rundiffusion.safetensors http://civitai.com/api/download/models/198530
+
+RUN useradd -ms /bin/bash stableuser
+USER stableuser
+WORKDIR /home/stableuser
 
 EXPOSE 7860
 ENTRYPOINT [ "bash", "/home/stableuser/stable-diffusion-webui/webui.sh", "--listen", "--port", "7860", "--no-download-sd-model", "--xformers"]
