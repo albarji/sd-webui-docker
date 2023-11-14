@@ -25,8 +25,9 @@ RUN wget -q https://raw.githubusercontent.com/AUTOMATIC1111/stable-diffusion-web
  	&& pip cache purge
 
 # New stage to download models and run
-FROM nvidia/cuda:12.2.2-runtime-ubuntu22.04 as modelsdownload
+FROM nvidia/cuda:12.2.2-runtime-ubuntu22.04
 COPY --from=build /home/stableuser/stable-diffusion-webui /home/stableuser/stable-diffusion-webui
+USER stableuser
 
 # Install runtime system dependencies
 RUN set -ex && \
