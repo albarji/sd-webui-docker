@@ -18,7 +18,6 @@ WORKDIR /home/stableuser
 SHELL ["/bin/bash", "-c"]
 RUN wget -q https://raw.githubusercontent.com/AUTOMATIC1111/stable-diffusion-webui/master/webui.sh \
 	&& bash webui.sh --skip-torch-cuda-test --exit \
- 	&& rm webui.sh \
 	&& python3 -m venv stable-diffusion-webui/venv/ \
 	&& source stable-diffusion-webui/venv/bin/activate \
 	&& pip install xformers \
@@ -30,7 +29,7 @@ FROM nvidia/cuda:12.2.2-runtime-ubuntu22.04
 # Install runtime system dependencies
 RUN set -ex && \
 	apt-get update && apt-get install --no-install-recommends --no-install-suggests -y \
-	wget git python3 python3-venv \
+	wget git python3 python3-venv libgl1 libglib2.0-0 \
 	&& apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Configure user again
@@ -45,4 +44,4 @@ COPY --from=build --chown=stableuser /home/stableuser/stable-diffusion-webui /ho
 RUN wget -q -O /home/stableuser/stable-diffusion-webui/models/Stable-diffusion/juggernautXL_version6Rundiffusion.safetensors http://civitai.com/api/download/models/198530
 
 EXPOSE 7860
-ENTRYPOINT [ "bash", "/home/stableuser/stable-diffusion-webui/webui.sh", "--listen", "--port", "7860", "--no-download-sd-model", "--xformers"]
+ENTRYPOINT [ "bash", "/home/stableuser/webui.sh", "--listen", "--port", "7860", "--no-download-sd-model", "--xformers"]
