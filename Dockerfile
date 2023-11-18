@@ -38,6 +38,7 @@ RUN set -ex && \
 RUN wget -q -O /home/stableuser/stable-diffusion-webui/models/Stable-diffusion/juggernautXL_version6Rundiffusion.safetensors http://civitai.com/api/download/models/198530
 
 RUN useradd -ms /bin/bash stableuser
+RUN chown -R stableuser /home/stableuser 
 USER stableuser
 WORKDIR /home/stableuser
 
