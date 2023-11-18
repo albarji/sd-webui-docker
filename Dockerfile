@@ -38,7 +38,7 @@ USER stableuser
 WORKDIR /home/stableuser
 
 # Copy stable-diffusion-webui files from previous layer
-COPY --from=build --chown=stableuser /home/stableuser/stable-diffusion-webui /home/stableuser/stable-diffusion-webui
+COPY --from=build --chown=stableuser /home/stableuser/* /home/stableuser/
 
 # Install models of interest
 RUN wget -q -O /home/stableuser/stable-diffusion-webui/models/Stable-diffusion/juggernautXL_version6Rundiffusion.safetensors http://civitai.com/api/download/models/198530
