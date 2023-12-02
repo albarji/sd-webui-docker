@@ -42,7 +42,7 @@ COPY --from=build --chown=stableuser /home/stableuser /home/stableuser/
 
 # Install models of interest
 RUN wget -q -O /home/stableuser/stable-diffusion-webui/models/Stable-diffusion/juggernautXL_version7Rundiffusion.safetensors https://civitai.com/api/download/models/240840
-RUN ls /home/stableuser/stable-diffusion-webui/models/
+RUN mkdir /home/stableuser/stable-diffusion-webui/models/Lora
 RUN wget -q -O /home/stableuser/stable-diffusion-webui/models/Lora/woodfigurez-sdxl.safetensors https://civitai.com/api/download/models/207919
 
 EXPOSE 7860
