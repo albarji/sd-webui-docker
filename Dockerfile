@@ -44,9 +44,10 @@ COPY --from=build --chown=stableuser /home/stableuser /home/stableuser/
 RUN wget -q -O /home/stableuser/stable-diffusion-webui/models/Stable-diffusion/juggernautXL_version7Rundiffusion.safetensors https://civitai.com/api/download/models/240840
 RUN mkdir /home/stableuser/stable-diffusion-webui/models/Lora
 RUN wget -q -O /home/stableuser/stable-diffusion-webui/models/Lora/woodfigurez-sdxl.safetensors https://civitai.com/api/download/models/207919
-RUN wget -q -O /home/stableuser/stable-diffusion-webui/models/Lora/junji-ito.safetensors https://civitai.com/api/download/models/208624
 RUN wget -q -O /home/stableuser/stable-diffusion-webui/models/Lora/PixarXL.safetensors https://civitai.com/api/download/models/211735
 RUN wget -q -O /home/stableuser/stable-diffusion-webui/models/Lora/BeksinskiXL.safetensors https://civitai.com/api/download/models/230409
+RUN wget -q -O /home/stableuser/stable-diffusion-webui/models/Lora/SDXLSamDoesArt.safetensors https://civitai.com/api/download/models/201510
 
+# Run server. Insecure extension access is allowed so that remote users can install extensions
 EXPOSE 7860
-ENTRYPOINT [ "bash", "/home/stableuser/webui.sh", "--listen", "--port", "7860", "--no-download-sd-model", "--xformers"]
+ENTRYPOINT [ "bash", "/home/stableuser/webui.sh", "--listen", "--port", "7860", "--no-download-sd-model", "--xformers", "--enable-insecure-extension-access"]
