@@ -19,7 +19,7 @@ Note the server will accept connections from any IP.
 
 ## Deploying in AWS
 
-If you want to launch this server in [Amazon Web Services](https://aws.amazon.com), do as follows
+If you want to launch this server in [Amazon Web Services](https://aws.amazon.com), do as follows. But bear in mind that you will need to pay AWS for the instances you create!
 
 ### Prerequisites
 
@@ -28,10 +28,21 @@ If you want to launch this server in [Amazon Web Services](https://aws.amazon.co
    * (optional) Inbound access, SSH, TCP, port 22, source 0.0.0.0/0 (allow SSH connection for debugging or installing additional models).
    * Outbound access, all traffic, all protocols, all ports, 0.0.0.0/0 (allow all access to the internet).
 
-You can further restrict the origin IP addresses if you want tighter access control. By default anybody on the internet can access your server!
+You can further restrict the origin IP addresses if you want tighter access control. By default anybody on the internet could access your server!
 
-2. (Optional) Create an access key. Only necessary if you want to access the server through SSH.
+2. Install [AWS CLI](https://aws.amazon.com/cli/) in your machine, configured with your AWS user. Alternatively, use [AWS Cloudshell](https://docs.aws.amazon.com/cloudshell/latest/userguide/welcome.html).
+
+3. Your AWS user must have full EC2 permissions.
+
+4. (Optional) Create an access key. Only necessary if you want to access the server through SSH.
 
 ### Deployment
 
-TODO
+1. Clone this project into your machine our your AWS Cloudhsell terminal.
+2. Access the `aws` subfolder.
+3. Configure the `launch.sh` script with the name of the security group and the access key you created in the prerequisites step.
+4. Run `launch.sh` to deploy the server. It should be accesible on port `80` after a few minutes.
+
+### Tear down
+
+Don't forget to terminate all the instances you have created once you have finished using them. You can do this in the AWS EC2 dashboard. None of us want you get bankrupt on AWS bills.
