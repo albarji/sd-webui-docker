@@ -1,5 +1,9 @@
 # Stable Diffusion WebUI Docker server
 
+<div align="center">
+    <img src="docs/logo.png" width="1024"><br>
+</div>
+
 A dockerized version of the [Stable Diffusion web UI by AUTOMATIC1111](https://github.com/AUTOMATIC1111/stable-diffusion-webui), including some models that show its potential.
 
 ## Usage
