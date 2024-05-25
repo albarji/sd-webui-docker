@@ -45,7 +45,6 @@ RUN wget -q -O /home/stableuser/stable-diffusion-webui/models/Stable-diffusion/j
 RUN mkdir /home/stableuser/stable-diffusion-webui/models/Lora
 RUN wget -q -O /home/stableuser/stable-diffusion-webui/models/Lora/woodfigurez-sdxl.safetensors https://civitai.com/api/download/models/207919
 RUN wget -q -O /home/stableuser/stable-diffusion-webui/models/Lora/PixarXL.safetensors https://civitai.com/api/download/models/211735
-RUN wget -q -O /home/stableuser/stable-diffusion-webui/models/Lora/BeksinskiXL.safetensors https://civitai.com/api/download/models/230409
 
 # Run server. Insecure extension access is allowed so that remote users can install extensions
 EXPOSE 7860
