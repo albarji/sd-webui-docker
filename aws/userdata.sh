@@ -27,4 +27,4 @@ cat '{"data-root": "/data/docker"}' > /etc/docker/daemon.json
 # Start docker service
 service docker start
 # Run SD web UI, serving on port 80
-docker run --gpus all --rm -p 80:7860 albarji/sd-webui:1.1.0
+docker run --gpus all --rm -p 80:7860 albarji/sd-webui:1.2.0
