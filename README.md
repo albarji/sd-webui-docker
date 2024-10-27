@@ -47,6 +47,13 @@ You can further restrict the origin IP addresses if you want tighter access cont
 3. Configure the `launch.sh` script with the name of the security group and the access key you created in the prerequisites step.
 4. Run `launch.sh` to deploy the server. It should be accesible on port `80` after a few minutes.
 
+### Troubleshooting
+
+If you cannot connect to the deployed server, try accessing through SSH to check the status of the setup procedure:
+
+1. Connect to you instance: `ssh -i "{YOUR_PEM_FILE}" ec2-user@{MACHINE_PUBLIC_DNS}`
+2. Check the logs with `sudo tail -f /var/log/cloud-init-output.log`
+
 ### Tear down
 
 Don't forget to terminate all the instances you have created once you have finished using them. You can do this in the AWS EC2 dashboard. None of us want you get bankrupt on AWS bills.
