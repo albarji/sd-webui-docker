@@ -23,7 +23,7 @@ yum install -y nvidia-container-toolkit
 amazon-linux-extras install -y docker
 # Configure docker to use the external NVMe disk to store all docker information
 mkdir /data/docker
-cat '{"data-root": "/data/docker"}' > /etc/docker/daemon.json
+echo '{"data-root": "/data/docker"}' > /etc/docker/daemon.json
 # Start docker service
 service docker start
 # Run SD web UI, serving on port 80
