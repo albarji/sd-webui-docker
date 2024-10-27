@@ -15,7 +15,7 @@
 #   -n: number of instances to create (default 1)
 
 KEY_NAME="Name of the key for accessing your instances"
-SECURITY_GROUP_NAME="Name of the security group stated in the requirements"
+SECURITY_GROUP_NAME="ID of the security group stated in the requirements"
 
 ninstances="1"
 while getopts n: flag
@@ -25,4 +25,4 @@ do
     esac
 done
 
-aws ec2 run-instances --image-id ami-0b1fb9933c34dc708 --count "${ninstances}" --instance-type g4dn.xlarge --key-name "${KEY_NAME} --security-group-ids "${SECURITY_GROUP_NAME}" --user-data file://userdata.sh
+aws ec2 run-instances --image-id ami-0b1fb9933c34dc708 --count "${ninstances}" --instance-type g4dn.xlarge --key-name "${KEY_NAME}" --security-group-ids "${SECURITY_GROUP_NAME}" --user-data file://userdata.sh
